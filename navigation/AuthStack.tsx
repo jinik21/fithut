@@ -2,6 +2,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import Header from "../components/Header";
 import AppScreen from "../screens/AppScreen";
+import LoginScreen from "../screens/Auth/LoginScreen";
+import RegisterScreen from "../screens/Auth/RegisterScreen";
 import AuthScreen from "../screens/AuthScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 
@@ -19,7 +21,8 @@ const AuthStackScreen = () => {
         component={ProfileScreen}
       />
       <AuthStack.Screen name="Auth" component={AuthScreen} />
-      <AuthStack.Screen name="App" component={AppScreen} />
+      <AuthStack.Screen name="Login" component={LoginScreen} />
+      <AuthStack.Screen name="Register" component={RegisterScreen} />
     </AuthStack.Navigator>
   );
 };
