@@ -31,7 +31,9 @@ const LoginScreen = ({ navigation }: Props) => {
   return (
     <ImageBackground
       style={styles.container}
-      source={require("../Assets/back1.jpg")}
+      source={{
+        uri: "https://cdn.discordapp.com/attachments/815896599162912811/848307135216615504/back1.jpg",
+      }}
     >
       <Modal transparent={true} visible={true}>
         <View style={styles.centeredView}>

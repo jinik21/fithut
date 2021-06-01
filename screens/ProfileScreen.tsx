@@ -4,6 +4,7 @@ import React from "react";
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import ActivityGraph from "../components/ActivityGraph";
 import Blobs from "../components/Blobs";
+import { activityStats, bodyMeasurements } from "../data";
 import { RootStackParamList } from "../types";
 
 const { width } = Dimensions.get("window");
@@ -17,43 +18,6 @@ interface Props {
   navigation: ProfileScreenNavigationProp;
   route: ProfileScreenRouteProp;
 }
-
-const activityStats = [
-  {
-    val: "70",
-    type: "bpm",
-  },
-  {
-    val: "2800",
-    type: "kcal",
-  },
-  {
-    val: "50",
-    type: "hrs",
-  },
-  {
-    val: "48",
-    type: "hrs",
-  },
-];
-
-const bodyMeasurements = [
-  {
-    val: 55,
-    type: "kg",
-    name: "Weight",
-  },
-  {
-    val: 175,
-    type: "cm",
-    name: "Height",
-  },
-  {
-    val: 20,
-    type: "yo",
-    name: "Age",
-  },
-];
 
 const ProfileScreen = ({ navigation }: Props) => {
   return (
