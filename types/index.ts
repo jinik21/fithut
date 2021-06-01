@@ -4,4 +4,14 @@ export type RootStackParamList = {
   Profile: undefined;
   Register: undefined;
   Login: undefined;
+  Landing: undefined;
 };
+
+export interface Workout {
+  name: String;
+  emoji: String;
+}
+export interface Item {
+  image: String;
+  name: String;
+}
