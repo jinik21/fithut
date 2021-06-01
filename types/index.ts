@@ -6,6 +6,7 @@ export type RootStackParamList = {
   Login: undefined;
   Landing: undefined;
   Video: undefined;
+  Activity: undefined;
 };
 
 export interface Workout {
