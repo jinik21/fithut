@@ -1,7 +1,7 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Alert,
   Modal,
@@ -11,8 +11,12 @@ import {
   Pressable,
   Image,
   View,
+  Dimensions,
+  TouchableOpacity,
 } from "react-native";
-import { SafeAreaInsetsContext } from "react-native-safe-area-context";
+import { AuthContext } from "../../context/AuthContext";
+
+const { width, height } = Dimensions.get("window");
 
 type RegisterScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -32,6 +36,7 @@ const RegisterScreen = ({ navigation }: Props) => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
 
+  const { register } = useContext(AuthContext);
   return (
     <View style={styles.centeredView}>
       <Image
@@ -79,10 +84,20 @@ const RegisterScreen = ({ navigation }: Props) => {
 
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={register}
             >
               <Text style={styles.textStyle}>Register</Text>
             </Pressable>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+              <Text
+                style={{
+                  color: "#999",
+                  marginTop: 20,
+                }}
+              >
+                Already a user? Login
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -97,8 +112,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
-    //   backgroundColor:"#4D4253",
   },
   modalView: {
     margin: 20,
@@ -147,7 +160,7 @@ const styles = StyleSheet.create({
     color: "#f52416",
   },
   bgImage: {
-    height: 700,
-    width: "100%",
+    height,
+    width,
   },
 });

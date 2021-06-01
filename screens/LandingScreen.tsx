@@ -14,7 +14,6 @@ import {
 import { shopData, workoutData } from "../data";
 import { Item, RootStackParamList, Workout } from "../types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("window");
@@ -29,79 +28,88 @@ interface Props {
   route: LandingScreenRouteProp;
 }
 
-const renderWorkoutList = ({ item }: { item: Workout }) => {
-  return (
-    <View style={styles.tab}>
-      <MaterialCommunityIcons name={item.emoji} size={24} color="black" />
-      <Text style={[styles.commomTextStyles]}>{item.name}</Text>
-    </View>
-  );
-};
-
-const renderShopItems = ({ item }: { item: Item }) => {
-  return (
-    <View style={styles.itemView}>
-      <Image source={{ uri: item.image.toString() }} style={styles.itemImage} />
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+const LandingScreen = ({ navigation }: Props) => {
+  const renderWorkoutList = ({ item }: { item: Workout }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Video")}
+        style={styles.tab}
       >
-        <Text style={{ color: "white", fontSize: 17, marginBottom: 2 }}>
-          {item.name}
-        </Text>
-        <TouchableOpacity style={styles.orderBtn}>
-          <Text>Order Now</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
+        <MaterialCommunityIcons name={item.emoji} size={24} color="black" />
+        <Text style={[styles.commomTextStyles]}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
 
-const renderWorkoutActivity = ({ item }: { item: Item }) => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: "row",
-        backgroundColor: "#4D4253",
-        marginVertical: 13,
-        padding: 10,
-        borderRadius: 8,
-      }}
-    >
-      <Image
-        source={{ uri: item.image.toString() }}
-        style={styles.workoutImage}
-      />
+  const renderShopItems = ({ item }: { item: Item }) => {
+    return (
+      <View style={styles.itemView}>
+        <Image
+          source={{ uri: item.image.toString() }}
+          style={styles.itemImage}
+        />
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ color: "white", fontSize: 17, marginBottom: 2 }}>
+            {item.name}
+          </Text>
+          <TouchableOpacity style={styles.orderBtn}>
+            <Text>Order Now</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
+  const renderWorkoutActivity = ({ item }: { item: Item }) => {
+    return (
       <View
         style={{
           flex: 1,
           flexDirection: "row",
-          justifyContent: "space-between",
-          paddingHorizontal: 20,
-          alignItems: "center",
+          backgroundColor: "#4D4253",
+          marginVertical: 13,
+          padding: 10,
+          borderRadius: 8,
         }}
       >
-        <View>
-          <Text style={{ color: "white", fontSize: 17, marginBottom: 2 }}>
-            WeightLifting
-          </Text>
-          <Text style={{ color: "white", fontSize: 17, marginBottom: 2 }}>
-            5 Exercises
-          </Text>
+        <Image
+          source={{ uri: item.image.toString() }}
+          style={styles.workoutImage}
+        />
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingHorizontal: 20,
+            alignItems: "center",
+          }}
+        >
+          <View>
+            <Text style={{ color: "white", fontSize: 17, marginBottom: 2 }}>
+              WeightLifting
+            </Text>
+            <Text style={{ color: "white", fontSize: 17, marginBottom: 2 }}>
+              5 Exercises
+            </Text>
+          </View>
+          <TouchableOpacity
+            style={styles.arrow}
+            onPress={() => navigation.navigate("Video")}
+          >
+            <AntDesign name="arrowright" size={22} color="white" />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.arrow}>
-          <AntDesign name="arrowright" size={22} color="white" />
-        </TouchableOpacity>
       </View>
-    </View>
-  );
-};
+    );
+  };
 
-const LandingScreen = ({ navigation }: Props) => {
   return (
     <ScrollView
       style={styles.container}
@@ -116,14 +124,14 @@ const LandingScreen = ({ navigation }: Props) => {
             Hi, Jane Doe!
           </Text>
         </View>
-        <View>
+        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
           <Image
             source={{ uri: "https://randomuser.me/api/portraits/women/94.jpg" }}
             style={styles.userImage}
           />
-        </View>
+        </TouchableOpacity>
       </View>
-      <SafeAreaView
+      <View
         style={{
           marginTop: 20,
           flex: 0,
@@ -137,7 +145,7 @@ const LandingScreen = ({ navigation }: Props) => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
-      </SafeAreaView>
+      </View>
       <View style={{ marginTop: 30, height: 330 }}>
         <View
           style={{

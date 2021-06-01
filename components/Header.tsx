@@ -1,14 +1,29 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import { Ionicons, Entypo } from "@expo/vector-icons";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../types";
 
 const { width } = Dimensions.get("window");
 
-const Header = () => {
+interface Props {
+  navigation: StackNavigationProp<RootStackParamList>;
+  title: string;
+}
+
+const Header = ({ navigation, title }: Props) => {
   return (
     <View style={styles.header}>
-      <Ionicons name="chevron-back" size={24} color="#cccccc" />
-      <Text style={{ fontSize: 20, color: "#cccccc" }}>Profile</Text>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Ionicons name="chevron-back" size={24} color="#cccccc" />
+      </TouchableOpacity>
+      <Text style={{ fontSize: 20, color: "#cccccc" }}>{title}</Text>
       <Entypo name="dots-three-horizontal" size={24} color="#cccccc" />
     </View>
   );

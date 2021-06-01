@@ -1,17 +1,16 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  Button,
-  Image,
   TextInput,
   ImageBackground,
   Modal,
-  Pressable,
+  TouchableOpacity,
 } from "react-native";
+import { AuthContext } from "../../context/AuthContext";
 import { RootStackParamList } from "../../types";
 
 type LoginScreenNavigationProp = StackNavigationProp<
@@ -28,6 +27,7 @@ const LoginScreen = ({ navigation }: Props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
   return (
     <ImageBackground
       style={styles.container}
@@ -58,12 +58,23 @@ const LoginScreen = ({ navigation }: Props) => {
               keyboardType="default"
               secureTextEntry={true}
             />
-            <Pressable
+            <TouchableOpacity
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={login}
             >
               <Text style={styles.textStyle}>Login</Text>
-            </Pressable>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+              <Text
+                style={{
+                  color: "#999",
+                  marginTop: 20,
+                }}
+              >
+                New user? Register
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -104,7 +115,8 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "#3d3938",
     borderRadius: 20,
-    padding: 35,
+    paddingHorizontal: 35,
+    paddingVertical: 30,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
