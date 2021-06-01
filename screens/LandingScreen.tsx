@@ -58,7 +58,7 @@ const LandingScreen = ({ navigation }: Props) => {
           <Text style={{ color: "white", fontSize: 17, marginBottom: 2 }}>
             {item.name}
           </Text>
-          <TouchableOpacity style={styles.orderBtn}>
+          <TouchableOpacity onPress={()=> navigation.navigate("Shop")} style={styles.orderBtn}>
             <Text>Order Now</Text>
           </TouchableOpacity>
         </View>
