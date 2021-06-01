@@ -9,6 +9,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import VideoScreen from "../screens/WorkoutActivity";
 import Header from "../components/Header";
 import { RootStackParamList } from "../types";
+import ShopScreen from "../screens/ShopScreen";
 
 const AppStack = createStackNavigator();
 
@@ -47,6 +48,19 @@ const AppStackScreen = () => {
           headerTransparent: true,
         }}
         component={ProfileScreen}
+      />
+      <AppStack.Screen
+        name="Shop"
+        options={{
+          header: ({ navigation }) => (
+            <Header 
+              title={"Shop"}
+              navigation={navigation as StackNavigationProp<RootStackParamList>}
+            />
+          ),
+          headerTransparent:true,
+        }}
+        component={ShopScreen}
       />
     </AppStack.Navigator>
   );
