@@ -7,9 +7,9 @@ import { RootStackParamList } from "../types";
 
 type VideoScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "Video"
+  "Workout"
 >;
-type VideoScreenRouteProp = RouteProp<RootStackParamList, "Video">;
+type VideoScreenRouteProp = RouteProp<RootStackParamList, "Workout">;
 interface Props {
   navigation: VideoScreenNavigationProp;
   route: VideoScreenRouteProp;
@@ -46,7 +46,7 @@ const VideoScreen = ({ navigation }: Props) => {
         </View>
         <View style={styles.thirdBox}>
           <Text style={styles.totalTime}>Total Time</Text>
-          <Text style={styles.time}>Time</Text>
+          <Text style={styles.time}>1 hr 45 min</Text>
         </View>
       </View>
 
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
     color: "#CCC",
   },
   time: {
-    fontSize: 15,
-    color: "#CCC",
+    fontSize: 13,
+    color: "#999",
   },
   totalTime: {
     fontSize: 14,

@@ -32,13 +32,12 @@ const ProfileScreen = ({ navigation }: Props) => {
         {bodyMeasurements.map((ele, i) => {
           const { name, type, val } = ele;
           return (
-            <>
+            <React.Fragment key={i}>
               <View
                 style={{
                   flex: 1,
                   alignItems: "center",
                 }}
-                key={i}
               >
                 <View
                   style={{
@@ -73,7 +72,7 @@ const ProfileScreen = ({ navigation }: Props) => {
                 </Text>
               </View>
               {i !== 2 && <View style={styles.divider} />}
-            </>
+            </React.Fragment>
           );
         })}
       </View>

@@ -36,7 +36,7 @@ const Video = ({ name, time }: Props) => {
         ]}
       >
         <View style={styles.video}>
-          <Text style={styles.totalTime}>{time}</Text>
+          <Text style={styles.totalTime}>1 hr 45 min</Text>
           <Text style={styles.name}>{name}</Text>
           {pressed ? (
             <AntDesign name="caretdown" size={22} color="#ccc" />

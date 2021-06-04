@@ -9,6 +9,7 @@ interface AuthContextType {
   isAuth: Boolean;
   login: () => void;
   register: () => void;
+  logout: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>();
@@ -21,11 +22,15 @@ const AuthContextProvider = ({ children }: any) => {
   const register = () => {
     setAuth(true);
   };
+  const logout = () => {
+    setAuth(false);
+  };
   return (
     <AuthContext.Provider
       value={{
         login,
         register,
+        logout,
         isAuth,
       }}
     >

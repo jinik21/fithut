@@ -4,8 +4,8 @@ export type RootStackParamList = {
   Profile: undefined;
   Register: undefined;
   Login: undefined;
-  Landing: undefined;
-  Video: undefined;
+  Home: undefined;
+  Workout: undefined;
   Shop: undefined;
   Activity: undefined;
 };

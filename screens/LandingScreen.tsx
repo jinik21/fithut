@@ -15,14 +15,17 @@ import { shopData, workoutData } from "../data";
 import { Item, RootStackParamList, Workout } from "../types";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { Feather } from "@expo/vector-icons";
+import { FAB } from "react-native-paper";
 
 const { width } = Dimensions.get("window");
 
-type LandingScreenNavigationProp = StackNavigationProp<
+type LandingScreenNavigationProp = DrawerNavigationProp<
   RootStackParamList,
-  "Landing"
+  "Home"
 >;
-type LandingScreenRouteProp = RouteProp<RootStackParamList, "Landing">;
+type LandingScreenRouteProp = RouteProp<RootStackParamList, "Home">;
 interface Props {
   navigation: LandingScreenNavigationProp;
   route: LandingScreenRouteProp;
@@ -32,7 +35,7 @@ const LandingScreen = ({ navigation }: Props) => {
   const renderWorkoutList = ({ item }: { item: Workout }) => {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("Video")}
+        onPress={() => navigation.navigate("Workout")}
         style={styles.tab}
       >
         <MaterialCommunityIcons name={item.emoji} size={24} color="black" />
@@ -58,7 +61,10 @@ const LandingScreen = ({ navigation }: Props) => {
           <Text style={{ color: "white", fontSize: 17, marginBottom: 2 }}>
             {item.name}
           </Text>
-          <TouchableOpacity onPress={()=> navigation.navigate("Shop")} style={styles.orderBtn}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Shop")}
+            style={styles.orderBtn}
+          >
             <Text>Order Now</Text>
           </TouchableOpacity>
         </View>
@@ -101,7 +107,7 @@ const LandingScreen = ({ navigation }: Props) => {
           </View>
           <TouchableOpacity
             style={styles.arrow}
-            onPress={() => navigation.navigate("Video")}
+            onPress={() => navigation.navigate("Workout")}
           >
             <AntDesign name="arrowright" size={22} color="white" />
           </TouchableOpacity>
@@ -111,83 +117,90 @@ const LandingScreen = ({ navigation }: Props) => {
   };
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={{
-        alignItems: "center",
-      }}
-    >
-      <View style={styles.headerContainer}>
-        <View>
-          <Text style={[styles.commomTextStyles]}>Stay Fit and Healthy ⛹️‍♂️</Text>
-          <Text style={[styles.commomTextStyles, { fontSize: 20 }]}>
-            Hi, Jane Doe!
-          </Text>
-        </View>
-        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-          <Image
-            source={{ uri: "https://randomuser.me/api/portraits/women/94.jpg" }}
-            style={styles.userImage}
-          />
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          marginTop: 20,
-          flex: 0,
-          height: 50,
+    <>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{
+          alignItems: "center",
         }}
       >
-        <FlatList
-          data={workoutData}
-          keyExtractor={(item) => item.name.toString()}
-          renderItem={renderWorkoutList}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
-      <View style={{ marginTop: 30, height: 330 }}>
+        <View style={styles.headerContainer}>
+          <View>
+            <Text style={[styles.commomTextStyles]}>
+              Stay Fit and Healthy ⛹️‍♂️
+            </Text>
+            <Text style={[styles.commomTextStyles, { fontSize: 20 }]}>
+              Hi, Jane Doe!
+            </Text>
+          </View>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <Feather name="menu" size={30} color="grey" />
+          </TouchableOpacity>
+        </View>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingHorizontal: 10,
-            marginVertical: 8,
+            marginTop: 20,
+            flex: 0,
+            height: 50,
           }}
         >
-          <Text style={[styles.commomTextStyles]}>Shop Now</Text>
-          <Text style={{ color: "#999" }}>Show All</Text>
+          <FlatList
+            data={workoutData}
+            keyExtractor={(item) => item.name.toString()}
+            renderItem={renderWorkoutList}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
         </View>
-        <FlatList
-          data={shopData}
-          keyExtractor={(item) => item.name.toString()}
-          renderItem={renderShopItems}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
-      <View style={{ width: width - 30 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingHorizontal: 10,
-            marginVertical: 8,
-          }}
-        >
-          <Text style={[styles.commomTextStyles]}>Featured Exercise</Text>
-          <Text style={{ color: "#999" }}>Show All</Text>
+        <View style={{ marginTop: 30, height: 330 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              paddingHorizontal: 10,
+              marginVertical: 8,
+            }}
+          >
+            <Text style={[styles.commomTextStyles]}>Shop Now</Text>
+            <Text style={{ color: "#999" }}>Show All</Text>
+          </View>
+          <FlatList
+            data={shopData}
+            keyExtractor={(item) => item.name.toString()}
+            renderItem={renderShopItems}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
         </View>
-        <FlatList
-          data={shopData}
-          keyExtractor={(item) => item.name.toString()}
-          renderItem={renderWorkoutActivity}
-          ListFooterComponent={() => {
-            return <View style={{ width, height: 20 }} />;
-          }}
-        />
-      </View>
-    </ScrollView>
+        <View style={{ width: width - 30 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              paddingHorizontal: 10,
+              marginVertical: 8,
+            }}
+          >
+            <Text style={[styles.commomTextStyles]}>Featured Exercise</Text>
+            <Text style={{ color: "#999" }}>Show All</Text>
+          </View>
+          <FlatList
+            data={shopData}
+            keyExtractor={(item) => item.name.toString()}
+            renderItem={renderWorkoutActivity}
+            ListFooterComponent={() => {
+              return <View style={{ width, height: 20 }} />;
+            }}
+          />
+        </View>
+      </ScrollView>
+      <FAB
+        style={styles.fab}
+        icon="run"
+        color="white"
+        onPress={() => navigation.navigate("Activity")}
+      />
+    </>
   );
 };
 
@@ -254,5 +267,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff5233",
     padding: 3,
     borderRadius: 3,
+  },
+  fab: {
+    position: "absolute",
+    margin: 16,
+    right: 0,
+    bottom: 10,
+    backgroundColor: "#f54748",
   },
 });
